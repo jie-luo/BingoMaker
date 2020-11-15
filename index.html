@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="container">
+  <h1>Bingo Card Generator</h1>
+
+  <p>
+    Put bingo card title here.
+  </p>
+  <input type="text" id="bingoTitle" name="bingoTitle" />
+  <p>
+    Put bingo card items in this text box here. One per line. You may put in more than 25 items.
+  </p>
+  <textarea id="bingoItems" name="bingoItems" rows="25"></textarea>
+  <p>
+    Other options:
+  </p>
+  <div id="optionsHolder">
+    <input type="checkbox" id="freeSpaceForce" name="freeSpaceForce" checked="1">
+    <label for="freeSpaceForce">Force "Free Space" square in center of board</label><br>
+    <input type="checkbox" id="randomSelection" name="randomSelection" checked="0">
+    <label for="randomSelection">Randomize board ordering</label><br>
+  </div>
+  <button type="button" id="bingoButton" onClick="generateBingoCard()">Generate Bingo Card</button> 
+  <canvas id="canvas">
+  </canvas>
+  <button type="button" id="downloadButton" onClick="download()">Download</button> 
+</div>
+<div id="testWidth"></div>
+<script src="magic.js"></script> 
+
+</body>
+</html> 
