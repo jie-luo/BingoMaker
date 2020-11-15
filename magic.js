@@ -22,7 +22,7 @@ function generateBingoCard() {
   var X_MARGIN = 50
   var Y_MARGIN = (WIDTH * 0.25) + X_MARGIN / 2
   var BOX_SIZE = (WIDTH - X_MARGIN) / BOARD_SIZE
-  var PADDING = 20
+  var PADDING = 5
   var coords = []
   for (var j = 0; j < BOARD_SIZE; j += 1) {
     for (var i = 0; i < BOARD_SIZE; i += 1) {
@@ -40,17 +40,17 @@ function generateBingoCard() {
   var j = 0
   for (var i = 0; i < coords.length; i += 1) {
     if (i == Math.floor(BOARD_SIZE * BOARD_SIZE / 2) && options.freeSpace) {
-      drawText(context, "Free Space", coords[i], BOX_SIZE - PADDING, BOX_SIZE - PADDING)
+      drawText(context, "Free Space", coords[i], BOX_SIZE, BOX_SIZE, PADDING)
       continue
     }
     if (j >= items.length) {
       break
     }
-    drawText(context, items[j].trim(), coords[i], BOX_SIZE - PADDING, BOX_SIZE - PADDING)
+    drawText(context, items[j].trim(), coords[i], BOX_SIZE, BOX_SIZE, PADDING)
     j += 1
   }
   var title = document.getElementById("bingoTitle").value
-  drawText(context, title, [0, 0], WIDTH, WIDTH * 0.25)
+  drawText(context, title, [0, 0], WIDTH, WIDTH * 0.25, 0)
 }
 
 function download() {
@@ -72,14 +72,14 @@ function drawBingoCardTemplate(context, coords, size) {
   }
 }
 
-function drawText(context, corpus, coord, boxWidth, boxHeight) {
-  var settings = fitToWidth(corpus, boxWidth, boxHeight)
+function drawText(context, corpus, coord, boxWidth, boxHeight, padding) {
+  var settings = fitToWidth(corpus, boxWidth - (2 * padding), boxHeight)
   context.font = settings.fontSize + "px Arial"
   context.textAlign = "center"
   context.fillStyle = "#000000"
   var centerIndex = settings.text.length / 2
   for (var i = 0; i < settings.text.length; i += 1) {
-    context.fillText(settings.text[i], coord[0] + (boxWidth)/2, coord[1] + (boxHeight)/2 + (i - centerIndex + 1) * settings.fontSize)
+    context.fillText(settings.text[i], coord[0] + (boxWidth)/2 + padding, coord[1] + (boxHeight)/2 + (i - centerIndex + 1) * settings.fontSize)
   }
 }
 
